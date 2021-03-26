@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        a{
+            text-decoration: none;
+            font-size:20px;
+        }
+    header{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 10%;
+        background-color: #3090a1;
+    }
+    .menu{
+        list-style: none;
+    }
+    .menu li {
+         display: inline-block;
+         padding:0px 15px;
+    }
+    .menu li a{
+        color:#fff;
+        letter-spacing: 1.2px;
+    }
+    .ctx a {
+        text-decoration: none;
+        color:#fff;
+    }
+    .logo{
+        font-size:25px;
+        color:#fff;
+    }
+    .container{
+        margin:0px 10%;
+    }
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+      }
+</style>
+</head>
+<body>
+    
+    <header>
+        <a class="logo">
+            Tuli Portlio
+        </a>
+        <ul  class="menu">
+            <li><a href="/admin">Home</a></li>
+            <li><a href="/admin/state">State</a></li>
+            <li><a href="/admin/user">user</a></li>
+            <li><a href="/admin/skill">Skills</a></li>
+            <li><a href="/admin/utility">Utility</a></li>
+            <li><a href="/admin/project">Project</a></li>
+            <li><a href="/admin/contact">Contact</a></li>
+        </ul>
+
+        <div class="ctx">
+            <a href="#">Logout</a>
+        </div>
+    </header>
+    {{{ body }}}
+</body>
+</html>
