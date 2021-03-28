@@ -4,32 +4,25 @@
           <div class="card">
             <div class="card-header text-center">
               <h3>Configure State</h3>
-              <a href="./index.html" class="btn btn-primary"
-                ><i class="fas fa-arrow-alt-circle-left"></i> Back</a
-              >
             </div>
           </div>
           <div class="card-content">
-            <form action="">
-              <div class="form-group">
-                <label for="logo">Logo</label>
-                <input type="text" class="form-control" name="logo" />
-              </div>
+            <form action="/state" method="POST">
               <div class="form-group">
                 <label for="client">Client</label>
-                <input type="text" class="form-control" name="client" />
+                <input value={{ state.client }} name="client" class="form-control" name="client" />
               </div>
               <div class="form-group">
                 <label for="project">Projects</label>
-                <input type="text" class="form-control" name="projects" />
+                <input value={{ state.project }} name="project" class="form-control" name="projects" />
               </div>
               <div class="form-group">
                 <label for="apps">Apps</label>
-                <input type="text" class="form-control" name="apps" />
+                <input value={{ state.app }} name="app" class="form-control" name="apps" />
               </div>
               <div class="form-group">
                 <label for="websites">Websites</label>
-                <input type="file" class="form-control" name="websites" />
+                <input value={{ state.website }} name="website"  class="form-control" name="websites" />
               </div>
               <div class="form-group mt-3">
                 <button type="submit" class="btn btn-primary">Submit</button>
