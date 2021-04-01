@@ -40,6 +40,7 @@
                 <th>Skill Name</th>
                 <th>Percent</th>
                 <th>Description</th>
+                <th>action</th>
               </tr>
             </thead>
             <tbody>
@@ -49,6 +50,9 @@
                 <td>{{name}}</td>
                 <td>{{percent}}</td>
                 <td>{{desc}}</td>
+                <td>
+                  <a onclick="return confirm('Are you want to Delete ?')" class="btn btn-danger" href="/admin/skill/del/{{_id}}">X</a>
+                </td>
               </tr>
               {{/each}}
             </tbody>

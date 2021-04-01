@@ -57,6 +57,15 @@ app.get("/admin/skill", async (req, res) => {
   res.render("admin/skill", { layout: "admin", skills });
 });
 
+app.get("/skill/get", async (req, res) => {
+  const skillsArray = await Skill.find({}).lean();
+  if (skillsArray) {
+    res.json(skillsArray);
+  } else {
+    res.json([]);
+  }
+});
+
 app.get("/admin/state", async (req, res) => {
   const state = await State.findOne({}).lean();
   res.render("admin/state", { layout: "admin", state });
@@ -112,7 +121,7 @@ app.post("/state", async (req, res) => {
   }
 });
 
-// state section end
+// skill add
 app.post("/skill", async (req, res) => {
   const { name, percent, desc } = req.body;
   if (name == "" || percent == "" || desc == "") {
@@ -130,6 +139,17 @@ app.post("/skill", async (req, res) => {
     res.redirect("/admin/skill");
   } else {
     // with error message
+    res.redirect("/admin/skill");
+  }
+});
+
+//  skill delete by id
+app.get("/admin/skill/del/:id", async (req, res) => {
+  // console.log(req.params.id);
+  const removed = await Skill.findOneAndRemove(req.params.id);
+  if (removed) {
+    res.redirect("/admin/skill");
+  } else {
     res.redirect("/admin/skill");
   }
 });
