@@ -1,0 +1,39 @@
+<div class="container">
+      <div class="row">
+        <div class="col-md-12 mx-auto mt-3">
+          <div class="card">
+            <div class="card-header text-center">
+              <h3>Messages</h3>
+            </div>
+          </div>
+          <div class="card-content">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>serial</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Message</th>
+                  <th>action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each messages}}
+                <tr>
+                  <td>{{ serial }}</td>
+                  <td>{{ name }}</td>
+                  <td>{{ email }}</td>
+                  <td>{{ subject }}</td>
+                  <td>{{ message }}</td>
+                  <td>
+                    <a href="/admin/message/delete/{{_id}}" class="btn btn-danger btn-sm">x</a>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -12,6 +12,7 @@ _db_connection();
 // Models
 const State = require("./models/stateModel");
 const Skill = require("./models/skillModel");
+const Message = require("./models/messageModel");
 
 // Middleware
 app.use(cors());
@@ -39,8 +40,23 @@ app.get("/admin", (req, res) => {
   res.render("admin/home", { layout: "admin" });
 });
 
-app.get("/admin/contact", (req, res) => {
-  res.render("admin/contact", { layout: "admin" });
+app.get("/admin/message", async (req, res) => {
+  const response = await Message.find({}).lean();
+  const messages = [];
+  response.forEach((message, index) => {
+    let serial = index + 1;
+    messages.push({ ...message, serial });
+  });
+  res.render("admin/message", { layout: "admin", messages });
+});
+
+app.get("/admin/message/delete/:id", async (req, res) => {
+  const removed = await Message.findByIdAndRemove(req.params.id);
+  if (removed) {
+    res.redirect("/admin/message");
+  } else {
+    res.redirect("/admin/message");
+  }
 });
 
 app.get("/admin/project", (req, res) => {
@@ -151,6 +167,26 @@ app.get("/admin/skill/del/:id", async (req, res) => {
     res.redirect("/admin/skill");
   } else {
     res.redirect("/admin/skill");
+  }
+});
+
+// Receive Message
+app.post("/admin/message", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  const newMessage = new Message({
+    name,
+    email,
+    subject,
+    message,
+  });
+
+  const created = await newMessage.save();
+
+  if (created) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
   }
 });
 
