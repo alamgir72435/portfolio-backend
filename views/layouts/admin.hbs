@@ -58,6 +58,32 @@
         display: flex;
         justify-content: space-between;
       }
+
+      .hide{
+          display: none;
+      }
+      .show{
+          display: block ;
+      }
+
+      .loader{
+          width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loader img{
+          width: 50px;
+          height: 50px;
+      }
+
+      #show-banner-img,
+      #show-logo-img{
+          width: 100px;
+          height:100px
+      }
 </style>
 </head>
 <body>
@@ -81,5 +107,51 @@
         </div>
     </header>
     {{{ body }}}
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script> 
+    <script>
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyBpOcvzGSsA66wVZCpxLLvaXDkeptnC8Gw",
+            authDomain: "portfolio-project-9263d.firebaseapp.com",
+            projectId: "portfolio-project-9263d",
+            storageBucket: "portfolio-project-9263d.appspot.com",
+            messagingSenderId: "486523862936",
+            appId: "1:486523862936:web:0e855402587224b03675ed"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+          // Image Upload 
+        const handleUpload = (event) => {
+            return new Promise((resolve, reject) => {
+            const file = event.target.files[0];
+            let filename =
+            Date.now() + "." + String(file.name).split(".")[1];
+            // updaload file and resolve
+            const storageRef = firebase.storage().ref(filename)
+            const uploadTask = storageRef.put(file);
+            uploadTask.on('state_changed', 
+            (snapshot) => {
+                // show Percentage
+            }, 
+            (error) => {
+                // Handle unsuccessful uploads
+            }, 
+            () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                resolve({
+                    fileName:filename,
+                    fileLocation:downloadURL
+                })
+                });
+            }
+            );
+            });
+        };
+    </script>
 </body>
 </html>
