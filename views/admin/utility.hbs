@@ -7,35 +7,37 @@
             </div>
           </div>
           <div class="card-content">
-            <form action="">
+            <form action="/admin/utility" method="POST">
               <div class="form-group">
                 <label for="fullname">Full Name</label>
-                <input type="text" class="form-control" name="fullname" />
+                <input value="{{utility.fullName}}" type="text" class="form-control" name="fullName" />
               </div>
               <div class="form-group">
                 <label for="designation">Designation</label>
-                <input type="text" class="form-control" name="designation" />
+                <input  value="{{utility.designation}}" type="text" class="form-control" name="designation" />
               </div>
               <div class="form-group">
                 <label for="description">description</label>
-                <input type="text" class="form-control" name="description" />
+                <textarea  rows="5" type="text" class="form-control" id="desc" name="description">
+                   {{utility.description}}
+                  </textarea>
               </div>
               
               <div class="form-group">
                 <label for="facebook">Facebook</label>
-                <input type="text" class="form-control" name="facebook" />
+                <input  value="{{utility.facebook}}" type="text" class="form-control" name="facebook" />
               </div>
               <div class="form-group">
                 <label for="twitter">Twitter</label>
-                <input type="text" class="form-control" name="twitter" />
+                <input  value="{{utility.twitter}}" type="text" class="form-control" name="twitter" />
               </div>
               <div class="form-group">
                 <label for="instagram">Instagram</label>
-                <input type="text" class="form-control" name="instagram" />
+                <input  value="{{utility.instagram}}" type="text" class="form-control" name="instagram" />
               </div>
               <div class="form-group">
                 <label for="youtube">Youtube</label>
-                <input type="text" class="form-control" name="youtube" />
+                <input  value="{{utility.youtube}}" type="text" class="form-control" name="youtube" />
               </div>
               
               <div class="form-group mt-3">
@@ -114,5 +116,8 @@
       document.querySelector('#logoImgInput').value = data.fileLocation
       document.querySelector('#show-logo-img').setAttribute('src', data.fileLocation)
      })
+
+    var desc = document.getElementById('desc')
+    document.getElementById('desc').value = String(desc.value).trim()
 
     </script>

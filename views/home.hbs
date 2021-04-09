@@ -27,36 +27,35 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5">
-					<img class="aboutImage" src="./img/about.jpg">
+					<img class="aboutImage" src="{{utility.aboutPhoto}}">
 				</div>
 				<div class="col-md-7 personal">
 					<div class="personal-info-inner">
-						<h4>My name is Alamgir Ahamed saif</h4>
-						<h3>Full Stack Web Developer</h4>
+						{{#if utility}}
+						<h4>{{ utility.fullName }}</h4>
+						<h3>{{ utility.designation }}</h3>
 						<p>
-							I am a full-stack web developer having more than 5+ years of experience and having good knowledge of front-end and back-end techniques for building web applications that match client needs.
-
-							I have developed several web applications from scratch but at the same time, I manage and update the client?s existing projects also as I have outstanding debugging skills.
-							
+							{{ utility.description }}
 						</p>
+						{{/if}}
 						<ul class="socials">
 							<li>
-								<a href="">
+								<a target="_blank" href="{{ utility.facebook }}">
 									<i class="fab fa-facebook"></i>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a target="_blank" href="{{ utility.twitter }}">
 									<i class="fab fa-twitter"></i>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a target="_blank" href="{{ utility.instagram }}">
 									<i class="fab fa-instagram"></i>
 								</a>
 							</li>
 							<li>
-								<a href="">
+								<a target="_blank" href="{{ utility.youtube }}">
 									<i class="fab fa-youtube"></i>
 								</a>
 							</li>

@@ -7,6 +7,7 @@ const State = require("./../models/stateModel");
 const Skill = require("./../models/skillModel");
 const Message = require("./../models/messageModel");
 const Utility = require("./../models/utilityModel");
+const Project = require("./../models/projectsModel");
 
 // admin panel
 router.get("/", (req, res) => {
@@ -32,8 +33,9 @@ router.get("/message/delete/:id", async (req, res) => {
   }
 });
 
-router.get("/project", (req, res) => {
-  res.render("admin/project", { layout: "admin" });
+router.get("/project", async (req, res) => {
+  const projects = await Project.find().lean();
+  res.render("admin/project", { layout: "admin", projects });
 });
 
 router.get("/skill", async (req, res) => {
@@ -57,6 +59,7 @@ router.get("/user", (req, res) => {
 
 router.get("/utility", async (req, res) => {
   const utility = await Utility.findOne().lean();
+  console.log(utility);
   res.render("admin/utility", { layout: "admin", utility });
 });
 
@@ -190,6 +193,97 @@ router.post("/banner-logo", async (req, res) => {
     } else {
       res.redirect("/admin/utility");
     }
+  }
+});
+
+router.post("/utility", async (req, res) => {
+  const {
+    fullName,
+    designation,
+    description,
+    facebook,
+    twitter,
+    instagram,
+    youtube,
+  } = req.body;
+
+  const utility = await Utility.findOne();
+
+  if (utility) {
+    // update
+    utility.fullName = fullName;
+    utility.designation = designation;
+    utility.description = description;
+    utility.facebook = facebook;
+    utility.twitter = twitter;
+    utility.instagram = instagram;
+    utility.youtube = youtube;
+
+    const updated = await utility.save();
+
+    if (updated) {
+      res.redirect("/admin/utility");
+    } else {
+      res.redirect("/admin/utility");
+    }
+  } else {
+    // insert
+    const newUtility = new Utility({
+      logo: "",
+      aboutPhoto: "",
+      fullName,
+      designation,
+      description,
+      facebook,
+      twitter,
+      instagram,
+      youtube,
+    });
+
+    const created = await newUtility.save();
+    if (created) {
+      res.redirect("/admin/utility");
+    } else {
+      res.redirect("/admin/utility");
+    }
+  }
+});
+
+router.post("/project", async (req, res) => {
+  const { projectName, projectDesc, link, thumbnail } = req.body;
+
+  if (
+    projectName === "" ||
+    projectDesc === "" ||
+    link === "" ||
+    thumbnail === ""
+  ) {
+    return res.redirect("/admin/project");
+  }
+
+  // insert
+  const newProject = new Project({
+    projectName,
+    projectDesc,
+    link,
+    thumbnail,
+  });
+
+  const created = await newProject.save();
+  if (created) {
+    console.log("Project Created");
+    res.redirect("/admin/project");
+  } else {
+    res.redirect("/admin/project");
+  }
+});
+
+router.get("/project/delete/:id", async (req, res) => {
+  const deleted = await Project.findByIdAndRemove(req.params.id);
+  if (deleted) {
+    res.redirect("/admin/project");
+  } else {
+    res.redirect("/admin/project");
   }
 });
 
