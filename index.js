@@ -5,8 +5,20 @@ const exphbs = require("express-handlebars");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const _db_connection = require("./config/connection");
+
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const flash = require("express-flash");
+const MongoDBSession = require("connect-mongodb-session")(session);
 // Database Connection
 _db_connection();
+const keys = require("./config/keys");
+
+// Store Session
+const store = new MongoDBSession({
+  uri: keys.uri,
+  collection: "user-sessions",
+});
 
 // Middleware
 app.use(cors());
@@ -17,6 +29,21 @@ app.engine(".hbs", exphbs({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
 // static file
 app.use(express.static("public"));
+
+// for message and auth
+app.use(cookieParser("keyboard cat"));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "my-secret",
+    cookie: {
+      maxAge: 60000,
+    },
+    store,
+  })
+);
+app.use(flash());
 
 // Route Handle
 app.use("/", require("./route"));

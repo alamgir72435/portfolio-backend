@@ -95,3 +95,44 @@ $("#sendMessage").click((event) => {
     });
   }
 });
+
+// show Product
+
+var stringTruncate = function (str, length) {
+  var dots = str.length > length ? "..." : "";
+  return str.substring(0, length) + dots;
+};
+
+(() => {
+  // fetch Product
+  $.get("/project/get", (res) => {
+    // array reverse
+    var projects = document.getElementById("projects");
+    projects.innerHTML = "";
+    if (res.length > 0) {
+      // if data found show data
+      for (project of res) {
+        projects.innerHTML += `
+        <div class="col-md-4">
+					<div class="card">
+						<img style="min-height:250px;max-height:250px" src="${
+              project.thumbnail
+            }" class="card-img-top">
+						<div class="card-body">
+							<div class="card-title">
+							${project.projectName}
+							</div>
+							<p>
+							${stringTruncate(project.projectDesc, 100)}
+							</p>
+							<a id="liveDemoBtn" class="btn btn-block" href="${project.link}">Live Demo</a>
+						</div>
+					</div>
+				</div>
+      `;
+      }
+    } else {
+      // No Data Found !
+    }
+  });
+})();

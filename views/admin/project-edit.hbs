@@ -3,29 +3,30 @@
         <div class="col-md-6 mx-auto mt-3">
           <div class="card">
             <div class="card-header text-center">
-              <h3>Projects</h3>
+              <h3>Projects Edit</h3>
             </div>
           </div>
           <div class="card-content">
-            <form action="/admin/project" method="POST">           
+            <form action="/admin/project/update" method="POST">           
               <div class="form-group">
                 <label for="projectName">projectName</label>
-                <input type="text" class="form-control" name="projectName" />
+                <input type="hidden" name="id" value="{{project._id}}">
+                <input value="{{project.projectName}}" type="text" class="form-control" name="projectName" />
               </div>
               <div class="form-group">
                 <label for="projectDesc">projectDesc</label>
                 <textarea rows="5" type="text" class="form-control" id="projectDesc" name="projectDesc">
-
+                    {{project.projectDesc}}
                 </textarea>
               </div>
               <div class="form-group">
                 <label for="Link">Project Link</label>
-                <input type="text" class="form-control" name="link" />
+                <input value="{{project.link}}" type="text" class="form-control" name="link" />
               </div>
               <div class="form-group">
                 <label for="thumbnail">Thumbnail</label>
                 <input type="file" id="thumbnail" class="form-control" />
-                <input type="hidden" name="thumbnail" id="place-thumbnail" >
+                <input value="{{project.thumbnail}}" type="hidden" name="thumbnail" id="place-thumbnail" >
               </div>                
               <div class="form-group mt-3">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -42,7 +43,7 @@
 
                 <div class="data">
                     <h4 class="text-center">Thumbnail Preview</h4>
-                    <img src="" class="img-fluid" id="show-thumbnail-img">
+                    <img src="{{project.thumbnail}}" class="img-fluid" id="show-thumbnail-img">
                 </div>
                 <div style="display: none;" class="loader">
                   <img src="/img/loading.gif">
@@ -51,41 +52,6 @@
             </div>
           </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="container">
-      <div class="row"> 
-        <div class="col-md-10 mt-5 mx-auto">
-          <table class="table table-striped"> 
-            <thead>
-              <tr>
-                <th>Project Name</th>
-                <th>Description</th>
-                <th>Link</th>
-                <th>thumbnail</th>
-                <th>action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each projects}}
-              <tr>
-                <td>{{ projectName }}</td>
-                <td>{{ projectDesc }}</td>
-                <td>{{ link }}</td>
-                <td>
-                  <img width="100px" height="100px" src="{{thumbnail}}" class="img-fluid">
-                </td>
-                <td>
-                  <a href="/admin/project/edit/{{ _id }}">Edit</a>
-                  <a href="/admin/project/delete/{{ _id }}">Delete</a>
-                </td>
-              </tr>
-              {{/each}}
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
