@@ -338,7 +338,7 @@ router.get("/project/delete/:id", isAuthenticated, async (req, res) => {
 });
 
 router.get("/login", checkAlreadyLoginInOrNot, (req, res) => [
-  res.render("admin/login"),
+  res.render("login"),
 ]);
 
 // router.post("/register", async (req, res) => {
