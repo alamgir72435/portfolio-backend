@@ -32,7 +32,7 @@ router.get("/project/get", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("admin/login");
+  res.render("login");
 });
 
 module.exports = router;
