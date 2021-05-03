@@ -33,15 +33,7 @@ router.get("/project/get", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render(path.join(__dirname, "../", "views", "login.hbs"));
-});
-
-router.get("/auth", (req, res) => {
-  res.render("home");
-});
-
-router.get("/authenticate", (req, res) => {
-  res.send("123");
+  res.render("login");
 });
 
 module.exports = router;
