@@ -10,7 +10,6 @@ const Project = require("./../models/projectsModel");
 router.get("/", async (req, res) => {
   const state = await State.findOne().lean();
   const utility = await Utility.findOne().lean();
-
   res.render("home", { state, utility });
 });
 
