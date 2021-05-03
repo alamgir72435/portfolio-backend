@@ -336,7 +336,7 @@ router.get("/project/delete/:id", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/login", checkAlreadyLoginInOrNot, (req, res) => {
+router.get("/login", (req, res) => {
   res.render("admin/login");
 });
 
