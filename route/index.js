@@ -5,6 +5,7 @@ const State = require("./../models/stateModel");
 const Skill = require("./../models/skillModel");
 const Utility = require("./../models/utilityModel");
 const Project = require("./../models/projectsModel");
+const path = require("path");
 
 // frontend
 router.get("/", async (req, res) => {
@@ -32,11 +33,11 @@ router.get("/project/get", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render(path.join(__dirname, "../", "views", "login.hbs"));
 });
 
 router.get("/auth", (req, res) => {
-  res.render("login");
+  res.render("home");
 });
 
 router.get("/authenticate", (req, res) => {
