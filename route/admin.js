@@ -25,11 +25,10 @@ const checkAlreadyLoginInOrNot = (req, res, next) => {
   if (req.session.isAuth) {
     return res.redirect("/admin");
   }
-
   next();
 };
 
-router.get("/", isAuthenticated, (req, res) => {
+router.get("/", (req, res) => {
   res.render("admin/home", { layout: "admin" });
 });
 
