@@ -28,7 +28,7 @@ const checkAlreadyLoginInOrNot = (req, res, next) => {
   next();
 };
 
-router.get("/", (req, res) => {
+router.get("/", isAuthenticated, (req, res) => {
   res.render("admin/home", { layout: "admin" });
 });
 
@@ -336,7 +336,7 @@ router.get("/project/delete/:id", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", checkAlreadyLoginInOrNot, (req, res) => {
   res.render("admin/auth");
 });
 
