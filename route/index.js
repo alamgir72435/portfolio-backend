@@ -35,4 +35,12 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+router.get("/auth", (req, res) => {
+  res.render("login");
+});
+
+router.get("/authenticate", (req, res) => {
+  res.send("123");
+});
+
 module.exports = router;
